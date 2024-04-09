@@ -143,12 +143,12 @@ class ModelArgs:
 
 
 @dataclass
-class ClassificationArgs(ModelArgs):
+class TextClassificationArgs(ModelArgs):
     """
-    Model args for a ClassificationModel
+    Model args for a TextClassificationModel
     """
 
-    model_class: str = "ClassificationModel"
+    model_class: str = "TextClassificationModel"
     labels_list: list = field(default_factory=list)
     labels_map: dict = field(default_factory=dict)
     lazy_delimiter: str = "\t"
@@ -167,12 +167,12 @@ class ClassificationArgs(ModelArgs):
 
 
 @dataclass
-class MultiLabelClassificationArgs(ModelArgs):
+class MultiLabelTextClassificationArgs(ModelArgs):
     """
-    Model args for a MultiLabelClassificationModel
+    Model args for a MultiLabelTextClassificationModel
     """
 
-    model_class: str = "MultiLabelClassificationModel"
+    model_class: str = "MultiLabelTextClassificationModel"
     sliding_window: bool = False
     stride: float = 0.8
     threshold: float = 0.5
@@ -184,12 +184,12 @@ class MultiLabelClassificationArgs(ModelArgs):
 
 
 @dataclass
-class NERArgs(ModelArgs):
+class TokenClassificationArgs(ModelArgs):
     """
-    Model args for a NERModel
+    Model args for a TokenClassificationModel
     """
 
-    model_class: str = "NERModel"
+    model_class: str = "TokenClassificationModel"
     classification_report: bool = False
     labels_list: list = field(default_factory=list)
     lazy_loading: bool = False
