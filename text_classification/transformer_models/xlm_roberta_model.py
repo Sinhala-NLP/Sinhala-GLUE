@@ -3,9 +3,7 @@ from transformers.models.xlm_roberta.modeling_xlm_roberta import (
     XLM_ROBERTA_PRETRAINED_MODEL_ARCHIVE_LIST,
 )
 
-from simpletransformers.classification.transformer_models.roberta_model import (
-    RobertaForSequenceClassification,
-)
+from text_classification.transformer_models.roberta_model import RobertaForSequenceClassification
 
 
 class XLMRobertaForSequenceClassification(RobertaForSequenceClassification):
