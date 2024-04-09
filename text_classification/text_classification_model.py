@@ -120,7 +120,7 @@ from transformers import (
 )
 from transformers.convert_graph_to_onnx import convert, quantize
 
-from simpletransformers.classification.classification_utils import (
+from text_classification.text_classification_utils import (
     InputExample,
     LazyClassificationDataset,
     ClassificationDataset,
@@ -128,12 +128,11 @@ from simpletransformers.classification.classification_utils import (
     load_hf_dataset,
     flatten_results,
 )
-from simpletransformers.config.global_args import global_args
-from simpletransformers.config.model_args import ClassificationArgs
-from simpletransformers.config.utils import sweep_config_to_sweep_values
-from simpletransformers.losses.loss_utils import init_loss
+from config.global_args import global_args
+from config.model_args import TextClassificationArgs
+from config.utils import sweep_config_to_sweep_values
+from losses.loss_utils import init_loss
 
-# from simpletransformers.custom_models.models import ElectraForSequenceClassification
 
 
 try:
@@ -2479,7 +2478,7 @@ class TextClassificationModel:
         self.args.save(output_dir)
 
     def _load_model_args(self, input_dir):
-        args = ClassificationArgs()
+        args = TextClassificationArgs()
         args.load(input_dir)
         return args
 

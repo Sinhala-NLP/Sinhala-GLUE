@@ -26,21 +26,21 @@ Adapted from the Huggingface code at https://github.com/huggingface/datasets/blo
 """
 
 
-class NERConfig(datasets.BuilderConfig):
-    """BuilderConfig for NER"""
+class TokenClassificationConfig(datasets.BuilderConfig):
+    """BuilderConfig for Token Classification"""
 
     def __init__(self, **kwargs):
         """BuilderConfig for NER.
         Args:
           **kwargs: keyword arguments forwarded to super.
         """
-        super(NERConfig, self).__init__(**kwargs)
+        super(TokenClassificationConfig, self).__init__(**kwargs)
 
 
-class NER(datasets.GeneratorBasedBuilder):
+class TokenClassification(datasets.GeneratorBasedBuilder):
     """NER dataset."""
 
-    BUILDER_CONFIG_CLASS = NERConfig
+    BUILDER_CONFIG_CLASS = TokenClassificationConfig
 
     def _info(self):
         return datasets.DatasetInfo(

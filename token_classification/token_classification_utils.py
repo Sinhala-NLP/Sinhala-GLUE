@@ -633,7 +633,7 @@ def load_hf_dataset(
         # dataset = load_dataset("conll2003", data_files=data)
         dataset = load_dataset(
             os.path.join(
-                os.path.dirname(os.path.abspath(__file__)), "ner_dataset_loading_script"
+                os.path.dirname(os.path.abspath(__file__)), "token_classification_dataset_loading_script"
             ),
             data_files=data,
             download_mode="force_redownload"

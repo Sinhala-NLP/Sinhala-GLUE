@@ -18,10 +18,10 @@ from seqeval.metrics import (
     precision_score,
     recall_score,
 )
-from simpletransformers.config.model_args import NERArgs
-from simpletransformers.config.utils import sweep_config_to_sweep_values
-from simpletransformers.losses.loss_utils import init_loss
-from simpletransformers.ner.ner_utils import (
+from config.model_args import TokenClassificationArgs
+from config.utils import sweep_config_to_sweep_values
+from losses.loss_utils import init_loss
+from token_classification.token_classification_utils import (
     InputExample,
     LazyNERDataset,
     convert_examples_to_features,
@@ -148,7 +148,7 @@ MODELS_WITH_EXTRA_SEP_TOKEN = [
 ]
 
 
-class NERModel:
+class TokenClassificationModel:
     def __init__(
         self,
         model_type,
@@ -162,7 +162,7 @@ class NERModel:
         **kwargs,
     ):
         """
-        Initializes a NERModel
+        Initializes a TokenClassification Model
 
         Args:
             model_type: The type of model (bert, roberta)
@@ -268,7 +268,7 @@ class NERModel:
 
         if isinstance(args, dict):
             self.args.update_from_dict(args)
-        elif isinstance(args, NERArgs):
+        elif isinstance(args, TokenClassificationArgs):
             self.args = args
 
         if "sweep_config" in kwargs:
@@ -2082,7 +2082,7 @@ class NERModel:
         self.args.save(output_dir)
 
     def _load_model_args(self, input_dir):
-        args = NERArgs()
+        args = TokenClassificationArgs()
         args.load(input_dir)
         return args
 
