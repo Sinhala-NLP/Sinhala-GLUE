@@ -11,7 +11,7 @@ from config.model_args import TextClassificationArgs
 from tasks.semantic_textual_similarity.evaluation import pearson_corr, spearman_corr, rmse
 from text_classification.text_classification_model import TextClassificationModel
 
-model_name = "FacebookAI/xlm-roberta-large"
+model_name = "FacebookAI/xlm-roberta-base"
 model_type = "xlmroberta"
 
 train = Dataset.to_pandas(load_dataset('sinhala-nlp/semantic-textual-similarity', split='train'))
@@ -50,6 +50,7 @@ for i in range(5):
     model_args.manual_seed = 777
     model_args.early_stopping_patience = 10
     model_args.save_steps = 200
+    model_args.regression = True
 
     processed_model_name = model_name.split("/")[1]
 
@@ -66,7 +67,7 @@ for i in range(5):
     model = TextClassificationModel(model_type, model_name, num_labels=1, args=model_args, use_cuda=torch.cuda.is_available())
     temp_train, temp_eval = train_test_split(train, test_size=0.2, random_state=777*i)
     model.train_model(temp_train, eval_df=temp_eval, pearson_corr=pearson_corr, spearman_corr=spearman_corr,
-                              mae=mean_absolute_error)
+                              rmse=rmse)
     predictions, raw_outputs = model.predict(test_sentence_pairs)
 
     test['predictions'] = predictions
