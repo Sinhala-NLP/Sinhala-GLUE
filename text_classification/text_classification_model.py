@@ -7,6 +7,8 @@ import collections
 import logging
 import math
 import os
+import glob
+import shutil
 import random
 import warnings
 from dataclasses import asdict
@@ -977,10 +979,20 @@ class TextClassificationModel:
                             )
 
                     if args.save_steps > 0 and global_step % args.save_steps == 0:
+                        if args.save_recent_only:
+                            del_paths = glob.glob(os.path.join(output_dir, 'checkpoint-*'))
+                            for del_path in del_paths:
+                                shutil.rmtree(del_path)
+
                         # Save model checkpoint
                         output_dir_current = os.path.join(
                             output_dir, "checkpoint-{}".format(global_step)
                         )
+
+                        if args.save_recent_only:
+                            del_paths = glob.glob(os.path.join(output_dir, 'checkpoint-*'))
+                            for del_path in del_paths:
+                                shutil.rmtree(del_path)
 
                         self.save_model(
                             output_dir_current, optimizer, scheduler, model=model
@@ -1004,6 +1016,12 @@ class TextClassificationModel:
                         )
 
                         if args.save_eval_checkpoints:
+
+                            if args.save_recent_only:
+                                del_paths = glob.glob(os.path.join(output_dir, 'checkpoint-*'))
+                                for del_path in del_paths:
+                                    shutil.rmtree(del_path)
+
                             self.save_model(
                                 output_dir_current,
                                 optimizer,
@@ -1163,6 +1181,10 @@ class TextClassificationModel:
                 os.makedirs(output_dir_current, exist_ok=True)
 
             if args.save_model_every_epoch:
+                if args.save_recent_only:
+                    del_paths = glob.glob(os.path.join(output_dir, 'checkpoint-*'))
+                    for del_path in del_paths:
+                        shutil.rmtree(del_path)
                 self.save_model(output_dir_current, optimizer, scheduler, model=model)
 
             if args.evaluate_during_training and args.evaluate_each_epoch:

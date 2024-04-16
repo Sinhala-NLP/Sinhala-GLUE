@@ -83,6 +83,7 @@ class ModelArgs:
     save_eval_checkpoints: bool = True
     save_model_every_epoch: bool = True
     save_optimizer_and_scheduler: bool = True
+    save_recent_only: bool = True
     save_steps: int = 2000
     scheduler: str = "linear_schedule_with_warmup"
     silent: bool = False
@@ -198,19 +199,3 @@ class TokenClassificationArgs(ModelArgs):
     special_tokens_list: list = field(default_factory=list)
 
 
-
-@dataclass
-class MultiModalClassificationArgs(ModelArgs):
-    """
-    Model args for a MultiModalClassificationModel
-    """
-
-    model_class: str = "MultiModalClassificationModel"
-    regression: bool = False
-    num_image_embeds: int = 1
-    text_label: str = "text"
-    labels_label: str = "labels"
-    images_label: str = "images"
-    image_type_extension: str = ""
-    data_type_extension: str = ""
-    special_tokens_list: list = field(default_factory=list)
