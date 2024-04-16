@@ -4,7 +4,6 @@ import torch
 import numpy as np
 from datasets import Dataset
 from datasets import load_dataset
-from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import train_test_split
 
 from config.model_args import TextClassificationArgs
