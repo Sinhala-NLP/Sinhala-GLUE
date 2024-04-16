@@ -306,7 +306,7 @@ class TextClassificationModel:
 
         if isinstance(args, dict):
             self.args.update_from_dict(args)
-        elif isinstance(args, ClassificationArgs):
+        elif isinstance(args, TextClassificationArgs):
             self.args = args
 
         if (
