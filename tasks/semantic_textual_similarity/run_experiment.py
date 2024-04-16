@@ -32,8 +32,8 @@ for i in range(5):
     model_args = TextClassificationArgs()
     model_args.num_train_epochs = 3
     model_args.no_save = False
-    model_args.fp16 = False
-    model_args.learning_rate = 1e-4
+    model_args.fp16 = True
+    model_args.learning_rate = 4e-4
     model_args.train_batch_size = 8
     model_args.max_seq_length = 256
     model_args.model_name = model_name
