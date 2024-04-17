@@ -55,7 +55,7 @@ class ModelArgs:
     evaluate_each_epoch: bool = True
     fp16: bool = True
     gradient_accumulation_steps: int = 1
-    learning_rate: float = 1e-6
+    learning_rate: float = 4e-5
     local_rank: int = -1
     logging_steps: int = 50
     loss_type: str = None
