@@ -29,7 +29,7 @@ rmse_values = []
 for i in range(5):
 
     model_args = TextClassificationArgs()
-    model_args.num_train_epochs = 3
+    model_args.num_train_epochs = 5
     model_args.no_save = False
     model_args.fp16 = True
     model_args.learning_rate = 1e-5
