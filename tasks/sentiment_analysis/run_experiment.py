@@ -10,8 +10,8 @@ from config.model_args import TextClassificationArgs
 from tasks.sentiment_analysis.evaluation import macro_f1, weighted_f1
 from text_classification.text_classification_model import TextClassificationModel
 
-model_name = "NLPC-UOM/SinBERT-small"
-model_type = "roberta"
+model_name = "FacebookAI/xlm-roberta-base"
+model_type = "xlmroberta"
 
 train = Dataset.to_pandas(load_dataset('sinhala-nlp/sinhala-sentiment-analysis', split='train', download_mode='force_redownload'))
 test = Dataset.to_pandas(load_dataset('sinhala-nlp/sinhala-sentiment-analysis', split='test', download_mode='force_redownload'))
