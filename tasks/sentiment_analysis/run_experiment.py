@@ -32,22 +32,22 @@ for i in range(5):
     model_args.num_train_epochs = 5
     model_args.no_save = False
     model_args.fp16 = True
-    model_args.learning_rate = 1e-5
+    model_args.learning_rate = 1e-4
     model_args.train_batch_size = 8
     model_args.max_seq_length = 512
     model_args.model_name = model_name
     model_args.model_type = model_type
     model_args.evaluate_during_training = True
     model_args.evaluate_during_training_verbose = True
-    model_args.evaluate_during_training_steps = 150
+    model_args.evaluate_during_training_steps = 200
     model_args.use_multiprocessing = False
     model_args.use_multiprocessing_for_evaluation = False
     model_args.overwrite_output_dir = True
     model_args.save_recent_only = True
-    model_args.logging_steps = 150
+    model_args.logging_steps = 200
     model_args.manual_seed = 777
     model_args.early_stopping_patience = 10
-    model_args.save_steps = 150
+    model_args.save_steps = 200
     model_args.regression = False
     model_args.labels_list = ["NEUTRAL", "POSITIVE", "NEGATIVE"]
 
@@ -65,7 +65,7 @@ for i in range(5):
 
     model = TextClassificationModel(model_type, model_name, num_labels=3, args=model_args, use_cuda=torch.cuda.is_available())
     temp_train, temp_eval = train_test_split(train, test_size=0.2, random_state=model_args.manual_seed*i)
-    model.train_model(temp_train, eval_df=temp_eval, macrof1=macro_f1, weightedf1=weighted_f1)
+    model.train_model(temp_train, eval_df=temp_eval, macro_f1=macro_f1, weighted_f1=weighted_f1)
     predictions, raw_outputs = model.predict(test_sentence_pairs)
 
     test['predictions'] = predictions
