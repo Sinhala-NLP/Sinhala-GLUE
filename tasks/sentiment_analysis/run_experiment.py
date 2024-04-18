@@ -17,8 +17,8 @@ train = Dataset.to_pandas(load_dataset('sinhala-nlp/sinhala-sentiment-analysis',
 test = Dataset.to_pandas(load_dataset('sinhala-nlp/sinhala-sentiment-analysis', split='test'))
 
 index = test['id'].to_list()
-train = train.rename(columns={'comment_phrase': 'body', 'sentence2': 'text_b', 'comment_sentiment': 'labels'}).dropna()
-test = test.rename(columns={'comment_phrase': 'body', 'sentence2': 'text_b'}).dropna()
+train = train.rename(columns={'comment_phrase': 'text_a', 'body': 'text_b', 'comment_sentiment': 'labels'}).dropna()
+test = test.rename(columns={'comment_phrase': 'text_a', 'body': 'text_b'}).dropna()
 
 test_sentence_pairs = list(map(list, zip(test['text_a'].to_list(), test['text_b'].to_list())))
 
