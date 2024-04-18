@@ -10,8 +10,8 @@ from config.model_args import TextClassificationArgs
 from tasks.semantic_textual_similarity.evaluation import pearson_corr, spearman_corr, rmse
 from text_classification.text_classification_model import TextClassificationModel
 
-model_name = "FacebookAI/xlm-roberta-large"
-model_type = "xlmroberta"
+model_name = "NLPC-UOM/SinBERT-large"
+model_type = "roberta"
 
 train = Dataset.to_pandas(load_dataset('sinhala-nlp/semantic-textual-similarity', split='train'))
 test = Dataset.to_pandas(load_dataset('sinhala-nlp/semantic-textual-similarity', split='test'))
