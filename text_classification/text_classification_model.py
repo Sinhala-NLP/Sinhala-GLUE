@@ -1947,7 +1947,7 @@ class TextClassificationModel:
 
         mcc = matthews_corrcoef(labels, preds)
         accuracy = accuracy_score(labels, preds)
-        f1 = f1_score(labels, preds)
+        # f1 = f1_score(labels, preds)
         if self.model.num_labels == 2:
             tn, fp, fn, tp = confusion_matrix(labels, preds, labels=[0, 1]).ravel()
             if self.args.sliding_window:
@@ -1968,7 +1968,7 @@ class TextClassificationModel:
                         **{
                             "mcc": mcc,
                             "accuracy": accuracy,
-                            "f1_score": f1,
+                            # "f1_score": f1,
                             "tp": tp,
                             "tn": tn,
                             "fp": fp,

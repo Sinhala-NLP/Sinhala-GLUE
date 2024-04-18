@@ -37,7 +37,6 @@ for i in range(5):
     model_args.max_seq_length = 512
     model_args.model_name = model_name
     model_args.model_type = model_type
-    model_args.evaluate_generated_text = True
     model_args.evaluate_during_training = True
     model_args.evaluate_during_training_verbose = True
     model_args.evaluate_during_training_steps = 150
@@ -55,7 +54,7 @@ for i in range(5):
     processed_model_name = model_name.split("/")[1]
 
     model_args.output_dir = os.path.join("outputs", "sentiment_analysis", processed_model_name)
-    model_args.best_model_dir = os.path.join("outputs", "sentiment_analysis" , processed_model_name, "best_model")
+    model_args.best_model_dir = os.path.join("outputs", "sentiment_analysis", processed_model_name, "best_model")
     model_args.cache_dir = os.path.join("cache_dir", "sentiment_analysis", processed_model_name)
 
     model_args.wandb_project = "Sinhala Sentiment Analysis"
@@ -66,7 +65,7 @@ for i in range(5):
 
     model = TextClassificationModel(model_type, model_name, num_labels=3, args=model_args, use_cuda=torch.cuda.is_available())
     temp_train, temp_eval = train_test_split(train, test_size=0.2, random_state=model_args.manual_seed*i)
-    model.train_model(temp_train, eval_df=temp_eval, macro_f1=macro_f1, weighted_f1=weighted_f1)
+    model.train_model(temp_train, eval_df=temp_eval, macrof1=macro_f1, weightedf1=weighted_f1)
     predictions, raw_outputs = model.predict(test_sentence_pairs)
 
     test['predictions'] = predictions
