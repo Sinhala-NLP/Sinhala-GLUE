@@ -13,8 +13,8 @@ from text_classification.text_classification_model import TextClassificationMode
 model_name = "FacebookAI/xlm-roberta-large"
 model_type = "xlmroberta"
 
-train = Dataset.to_pandas(load_dataset('sinhala-nlp/sinhala-sentiment-analysis', split='train'))
-test = Dataset.to_pandas(load_dataset('sinhala-nlp/sinhala-sentiment-analysis', split='test'))
+train = Dataset.to_pandas(load_dataset('sinhala-nlp/sinhala-sentiment-analysis', split='train', download_mode='force_redownload'))
+test = Dataset.to_pandas(load_dataset('sinhala-nlp/sinhala-sentiment-analysis', split='test', download_mode='force_redownload'))
 
 index = test['id'].to_list()
 train = train.rename(columns={'comment_phrase': 'text_a', 'body': 'text_b', 'comment_sentiment': 'labels'}).dropna()
