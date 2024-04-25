@@ -65,7 +65,6 @@ for i in range(5):
     model_args.manual_seed = 777
     model_args.early_stopping_patience = 10
     model_args.save_steps = 200
-    model_args.regression = False
     model_args.labels_list = ["ORG", "PER", "LOC", "O"]
 
     processed_model_name = model_name.split("/")[1]
