@@ -3,6 +3,8 @@ import collections
 import logging
 import math
 import os
+import glob
+import shutil
 import random
 import tempfile
 import warnings
@@ -860,6 +862,11 @@ class TokenClassificationModel:
                             output_dir, "checkpoint-{}".format(global_step)
                         )
 
+                        if args.save_recent_only:
+                            del_paths = glob.glob(os.path.join(output_dir, 'checkpoint-*'))
+                            for del_path in del_paths:
+                                shutil.rmtree(del_path)
+
                         self.save_model(
                             output_dir_current, optimizer, scheduler, model=model
                         )
@@ -1038,6 +1045,11 @@ class TokenClassificationModel:
                 output_dir,
                 "checkpoint-{}-epoch-{}".format(global_step, epoch_number),
             )
+
+            if args.save_recent_only:
+                del_paths = glob.glob(os.path.join(output_dir, 'checkpoint-*'))
+                for del_path in del_paths:
+                    shutil.rmtree(del_path)
 
             if args.save_model_every_epoch or args.evaluate_during_training:
                 os.makedirs(output_dir_current, exist_ok=True)
