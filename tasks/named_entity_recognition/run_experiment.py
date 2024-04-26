@@ -34,8 +34,8 @@ def convert_df(input_df):
 model_name = "FacebookAI/xlm-roberta-base"
 model_type = "xlmroberta"
 
-train = Dataset.to_pandas(load_dataset('sinhala-nlp/named-entity-recognition', split='train'))
-test = Dataset.to_pandas(load_dataset('sinhala-nlp/named-entity-recognition', split='test'))
+train = Dataset.to_pandas(load_dataset('sinhala-nlp/named-entity-recognition', split='train', download_mode='force_redownload'))
+test = Dataset.to_pandas(load_dataset('sinhala-nlp/named-entity-recognition', split='test', download_mode='force_redownload'))
 
 
 test_df, test_sentences = convert_df(test)
