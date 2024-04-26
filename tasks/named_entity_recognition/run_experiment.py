@@ -31,7 +31,7 @@ def convert_df(input_df):
     return pd.DataFrame(records, columns=["sentence_id", "words", "labels"]), sentences
 
 
-model_name = "FacebookAI/xlm-roberta-base"
+model_name = "FacebookAI/xlm-roberta-large"
 model_type = "xlmroberta"
 
 train = Dataset.to_pandas(load_dataset('sinhala-nlp/named-entity-recognition', split='train', download_mode='force_redownload'))
@@ -56,15 +56,15 @@ for i in range(5):
     model_args.model_type = model_type
     model_args.evaluate_during_training = True
     model_args.evaluate_during_training_verbose = True
-    model_args.evaluate_during_training_steps = 200
+    model_args.evaluate_during_training_steps = 120
     model_args.use_multiprocessing = False
     model_args.use_multiprocessing_for_evaluation = False
     model_args.overwrite_output_dir = True
     model_args.save_recent_only = True
-    model_args.logging_steps = 200
+    model_args.logging_steps = 120
     model_args.manual_seed = 777
     model_args.early_stopping_patience = 10
-    model_args.save_steps = 200
+    model_args.save_steps = 120
     model_args.labels_list = ["ORG", "PER", "LOC", "O"]
 
     processed_model_name = model_name.split("/")[1]
