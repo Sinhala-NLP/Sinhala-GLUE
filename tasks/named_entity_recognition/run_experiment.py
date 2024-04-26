@@ -87,10 +87,16 @@ for i in range(5):
     predictions, raw_outputs = model.predict(test_sentences, split_on_space=False)
 
     final_predictions = []
-    for prediction in predictions:
-        for word_prediction in prediction:
-            for key, value in word_prediction.items():
-                final_predictions.append(value)
+    for prediction, test_sentence in zip(predictions, test_sentences):
+        if len(prediction) == len(test_sentence):
+            for word_prediction in prediction:
+                for key, value in word_prediction.items():
+                    final_predictions.append(value)
+        else:
+            for word_prediction in prediction:
+                for key, value in word_prediction.items():
+                    final_predictions.append(value)
+            final_predictions += ['O'] * (len(test_sentence) - len(prediction))
 
     test_df['predictions'] = final_predictions
     macro = macro_f1(test_df["labels"].tolist(), test_df["predictions"].tolist())
