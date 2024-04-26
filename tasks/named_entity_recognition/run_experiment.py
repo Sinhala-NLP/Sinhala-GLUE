@@ -8,7 +8,7 @@ from datasets import load_dataset
 from sklearn.model_selection import train_test_split
 
 from config.model_args import TokenClassificationArgs
-from tasks.sentiment_analysis.evaluation import macro_f1, weighted_f1
+from tasks.named_entity_recognition.evaluation import macro_f1, weighted_f1
 from token_classification.token_classification_model import TokenClassificationModel
 
 
@@ -83,7 +83,7 @@ for i in range(5):
                                     use_cuda=torch.cuda.is_available())
 
     temp_train, temp_eval = train_test_split(train, test_size=0.2, random_state=model_args.manual_seed * i)
-    model.train_model(convert_df(temp_train)[0], eval_df=convert_df(temp_eval)[0], macro_f1=macro_f1, weighted_f1=weighted_f1)
+    model.train_model(convert_df(temp_train)[0], eval_df=convert_df(temp_eval)[0])
     predictions, raw_outputs = model.predict(test_sentences, split_on_space=True)
 
     final_predictions = []
