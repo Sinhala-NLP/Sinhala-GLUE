@@ -88,29 +88,33 @@ for i in range(5):
 
     final_predictions = []
     for prediction, test_sentence in zip(predictions, test_sentences):
-        if len(prediction) == len(test_sentence):
-            for word_prediction in prediction:
-                for key, value in word_prediction.items():
-                    final_predictions.append(value)
-        else:
-            print(test_sentence)
-            for word_prediction in prediction:
-                for key, value in word_prediction.items():
-                    final_predictions.append(value)
-            final_predictions += ['O'] * (len(test_sentence) - len(prediction))
+        sentence_prediction = []
+        for word_prediction in prediction:
+            for key, value in word_prediction.items():
+                sentence_prediction.append(value)
+        final_predictions.append(sentence_prediction)
+        # else:
+        #     print(test_sentence)
+        #     for word_prediction in prediction:
+        #         for key, value in word_prediction.items():
+        #             final_predictions.append(value)
+        #     final_predictions += ['O'] * (len(test_sentence) - len(prediction))
+    test["predictions"] = final_predictions
+    test.to_csv("test_data.tsv", sep='\t', encoding='utf-8', index=False)
 
-    test_df['predictions'] = final_predictions
-    macro = macro_f1(test_df["labels"].tolist(), test_df["predictions"].tolist())
-    weighted = weighted_f1(test_df["labels"].tolist(), test_df["predictions"].tolist())
 
-    macrof1_values.append(macro)
-    weightedf1_values.append(weighted)
-
-print(macrof1_values)
-print(weightedf1_values)
-
-print("Mean Macro F1:", np.mean(np.array(macrof1_values)))
-print("STD Macro F1:", np.std(np.array(macrof1_values)))
-
-print("Mean Weighted F1:", np.mean(np.array(weightedf1_values)))
-print("STD Weighted F1:", np.std(np.array(weightedf1_values)))
+#     test_df['predictions'] = final_predictions
+#     macro = macro_f1(test_df["labels"].tolist(), test_df["predictions"].tolist())
+#     weighted = weighted_f1(test_df["labels"].tolist(), test_df["predictions"].tolist())
+#
+#     macrof1_values.append(macro)
+#     weightedf1_values.append(weighted)
+#
+# print(macrof1_values)
+# print(weightedf1_values)
+#
+# print("Mean Macro F1:", np.mean(np.array(macrof1_values)))
+# print("STD Macro F1:", np.std(np.array(macrof1_values)))
+#
+# print("Mean Weighted F1:", np.mean(np.array(weightedf1_values)))
+# print("STD Weighted F1:", np.std(np.array(weightedf1_values)))
