@@ -93,6 +93,7 @@ for i in range(5):
                 for key, value in word_prediction.items():
                     final_predictions.append(value)
         else:
+            print(test_sentence)
             for word_prediction in prediction:
                 for key, value in word_prediction.items():
                     final_predictions.append(value)
