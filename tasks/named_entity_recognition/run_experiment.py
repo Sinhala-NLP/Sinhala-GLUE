@@ -84,7 +84,7 @@ for i in range(5):
 
     temp_train, temp_eval = train_test_split(train, test_size=0.2, random_state=model_args.manual_seed * i)
     model.train_model(convert_df(temp_train)[0], eval_df=convert_df(temp_eval)[0])
-    predictions, raw_outputs = model.predict(test_sentences, split_on_space=True)
+    predictions, raw_outputs = model.predict(test_sentences, split_on_space=False)
 
     final_predictions = []
     for prediction in predictions:
