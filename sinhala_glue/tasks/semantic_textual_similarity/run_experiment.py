@@ -6,9 +6,9 @@ from datasets import Dataset
 from datasets import load_dataset
 from sklearn.model_selection import train_test_split
 
-from config.model_args import TextClassificationArgs
-from tasks.semantic_textual_similarity.evaluation import pearson_corr, spearman_corr, rmse
-from text_classification.text_classification_model import TextClassificationModel
+from sinhala_glue.config import TextClassificationArgs
+from sinhala_glue.tasks.semantic_textual_similarity.evaluation import pearson_corr, spearman_corr, rmse
+from sinhala_glue.text_classification import TextClassificationModel
 
 model_name = "FacebookAI/xlm-roberta-base"
 model_type = "xlmroberta"

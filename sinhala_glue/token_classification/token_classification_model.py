@@ -20,10 +20,10 @@ from seqeval.metrics import (
     precision_score,
     recall_score,
 )
-from config.model_args import TokenClassificationArgs
-from config.utils import sweep_config_to_sweep_values
-from losses.loss_utils import init_loss
-from token_classification.token_classification_utils import (
+from sinhala_glue.config import TokenClassificationArgs
+from sinhala_glue.config.utils import sweep_config_to_sweep_values
+from sinhala_glue.losses import init_loss
+from sinhala_glue.token_classification.token_classification_utils import (
     InputExample,
     LazyNERDataset,
     convert_examples_to_features,
