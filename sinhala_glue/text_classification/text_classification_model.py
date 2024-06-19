@@ -122,6 +122,8 @@ from transformers import (
 )
 from transformers.convert_graph_to_onnx import convert, quantize
 
+from sinhala_glue.config.model_args import TextClassificationArgs
+from sinhala_glue.losses.loss_utils import init_loss
 from sinhala_glue.text_classification.text_classification_utils import (
     InputExample,
     LazyClassificationDataset,
@@ -131,9 +133,9 @@ from sinhala_glue.text_classification.text_classification_utils import (
     flatten_results,
 )
 from sinhala_glue.config import global_args
-from sinhala_glue.config import TextClassificationArgs
+
 from sinhala_glue.config.utils import sweep_config_to_sweep_values
-from sinhala_glue.losses import init_loss
+
 
 
 
