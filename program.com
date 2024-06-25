@@ -4,6 +4,8 @@
 #SBATCH --mem=10G
 #SBATCH --time=04:00:00
 #SBATCH --cpus-per-task=1
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=t.ranasinghe@lancaster.ac.uk
 
 source /etc/profile
 module add anaconda3/2023.09
