@@ -9,7 +9,7 @@ source /etc/profile
 module add anaconda3/2023.09
 module add cuda/12.0
 
-source activate /storage/hpc/37/ranasint/conda_envs
+source activate /storage/hpc/37/ranasint/conda_envs/transformer_exp
 export HF_HOME=/scratch/hpc/37/ranasint/hf_cache
 
-python -m tasks.named_entity_recognition.run_experiment
+python -m sinhala_glue.tasks.named_entity_recognition.run_experiment
