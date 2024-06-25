@@ -2,9 +2,9 @@ import torch
 import warnings
 from torch.nn import CrossEntropyLoss
 
-from losses.dice_loss import DiceLoss
-from losses.focal_loss import FocalLoss
-from losses.tversky_loss import TverskyLoss
+from sinhala_glue.losses.dice_loss import DiceLoss
+from sinhala_glue.losses.focal_loss import FocalLoss
+from sinhala_glue.losses.tversky_loss import TverskyLoss
 
 
 # from losses import FocalLoss, DiceLoss, TverskyLoss

@@ -7,9 +7,9 @@ from datasets import Dataset
 from datasets import load_dataset
 from sklearn.model_selection import train_test_split
 
-from config.model_args import TokenClassificationArgs
-from tasks.named_entity_recognition.evaluation import macro_f1, weighted_f1
-from token_classification.token_classification_model import TokenClassificationModel
+from sinhala_glue.config.model_args import TokenClassificationArgs
+from sinhala_glue.tasks.named_entity_recognition.evaluation import macro_f1, weighted_f1
+from sinhala_glue.token_classification.token_classification_model import TokenClassificationModel
 
 
 def convert_to_list(input_string):

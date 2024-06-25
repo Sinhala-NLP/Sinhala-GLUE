@@ -3,7 +3,7 @@ from transformers.models.camembert.modeling_camembert import (
     CAMEMBERT_PRETRAINED_MODEL_ARCHIVE_LIST,
 )
 
-from text_classification.transformer_models.roberta_model import RobertaForSequenceClassification
+from sinhala_glue.text_classification.transformer_models.roberta_model import RobertaForSequenceClassification
 
 
 )
