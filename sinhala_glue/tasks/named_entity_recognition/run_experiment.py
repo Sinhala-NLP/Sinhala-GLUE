@@ -31,7 +31,7 @@ def convert_df(input_df):
     return pd.DataFrame(records, columns=["sentence_id", "words", "labels"]), sentences
 
 
-model_name = "FacebookAI/xlm-roberta-base"
+model_name = "FacebookAI/xlm-roberta-large"
 model_type = "xlmroberta"
 
 train = Dataset.to_pandas(load_dataset('sinhala-nlp/named-entity-recognition', split='train', download_mode='force_redownload'))
