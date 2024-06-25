@@ -34,7 +34,7 @@ for i in range(5):
     model_args.fp16 = True
     model_args.learning_rate = 1e-5
     model_args.train_batch_size = 8
-    model_args.max_seq_length = 256
+    model_args.max_seq_length = 512
     model_args.model_name = model_name
     model_args.model_type = model_type
     model_args.evaluate_generated_text = True
