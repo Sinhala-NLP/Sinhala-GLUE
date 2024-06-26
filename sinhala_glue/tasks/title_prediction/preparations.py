@@ -6,7 +6,7 @@ from datasets import load_dataset
 from tqdm import tqdm
 
 
-def significant_overlap(df, threshold=0.2, max_features=30000):
+def significant_overlap(df, threshold=0.2, max_features=16000):
     # Vectorize the News Content to get token counts with a maximum of 30,000 features
     vectorizer = CountVectorizer(max_features=max_features).fit_transform(
         df['News Content'])
