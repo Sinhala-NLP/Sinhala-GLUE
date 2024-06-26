@@ -43,7 +43,7 @@ def significant_overlap(df, threshold=0.2):
 
 
 nsina = Dataset.to_pandas(load_dataset('sinhala-nlp/NSINA', split='train'))
-top_nsina = nsina.head(20000)
+top_nsina = nsina.head(40000)
 
-new_df = significant_overlap(top_nsina, threshold=0.6)
+new_df = significant_overlap(top_nsina, threshold=0.5)
 new_df.to_csv("full.tsv", sep='\t', encoding='utf-8', index=False)
