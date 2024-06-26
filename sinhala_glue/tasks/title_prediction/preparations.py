@@ -33,16 +33,16 @@ def significant_overlap(df, threshold=0.2, max_features=16000):
             # Add the original row with is_headline=1
             new_rows.append({
                 'News Content': row['News Content'],
-                'headline': row['headline'],
-                'is_headline': 1
+                'Headline': row['Headline'],
+                'Is_headline': 1
             })
 
             # Add rows with significant overlap
             for sim_idx in top_similar_indices:
                 new_rows.append({
                     'News Content': df.at[sim_idx, 'News Content'],
-                    'headline': row['headline'],
-                    'is_headline': 0
+                    'Headline': row['Headline'],
+                    'Is_headline': 0
                 })
 
     # Create the new dataframe
