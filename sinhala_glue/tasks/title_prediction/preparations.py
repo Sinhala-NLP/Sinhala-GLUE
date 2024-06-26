@@ -7,7 +7,7 @@ from datasets import load_dataset
 
 def significant_overlap(df, threshold=0.2):
     # Vectorize the News Content to get token counts
-    vectorizer = CountVectorizer(max_features=64000).fit_transform(df['News Content'])
+    vectorizer = CountVectorizer(max_features=10000).fit_transform(df['News Content'])
     vectors = vectorizer.toarray()
 
     # Calculate cosine similarity matrix
@@ -43,6 +43,7 @@ def significant_overlap(df, threshold=0.2):
 
 
 nsina = Dataset.to_pandas(load_dataset('sinhala-nlp/NSINA', split='train'))
+top_nsina = nsina.head(50000)
 
 new_df = significant_overlap(nsina, threshold=0.3)
 print(new_df)
