@@ -10,8 +10,8 @@ from sinhala_glue.config.model_args import TextClassificationArgs
 from sinhala_glue.tasks.semantic_textual_similarity.evaluation import pearson_corr, spearman_corr, rmse
 from sinhala_glue.text_classification.text_classification_model import TextClassificationModel
 
-model_name = "FacebookAI/xlm-roberta-large"
-model_type = "xlmroberta"
+model_name = "google/rembert"
+model_type = "auto"
 
 train = Dataset.to_pandas(load_dataset('sinhala-nlp/semantic-textual-similarity', split='train'))
 test = Dataset.to_pandas(load_dataset('sinhala-nlp/semantic-textual-similarity', split='test'))
