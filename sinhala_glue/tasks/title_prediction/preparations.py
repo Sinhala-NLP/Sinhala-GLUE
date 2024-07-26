@@ -6,7 +6,7 @@ from datasets import load_dataset
 from tqdm import tqdm
 
 
-def significant_overlap(df, threshold=0.2, max_features=16000):
+def significant_overlap(df, threshold, max_features=16000):
     # Vectorize the News Content to get token counts with a maximum of 30,000 features
     vectorizer = CountVectorizer(max_features=max_features).fit_transform(
         df['News Content'])
@@ -53,5 +53,5 @@ def significant_overlap(df, threshold=0.2, max_features=16000):
 nsina = Dataset.to_pandas(load_dataset('sinhala-nlp/NSINA', split='train'))
 top_nsina = nsina.head(40000)
 
-new_df = significant_overlap(top_nsina, threshold=0.8)
+new_df = significant_overlap(top_nsina, threshold=0.75)
 new_df.to_csv("full.tsv", sep='\t', encoding='utf-8', index=False)
