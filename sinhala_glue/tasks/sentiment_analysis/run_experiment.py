@@ -13,8 +13,10 @@ from sinhala_glue.text_classification.text_classification_model import TextClass
 model_name = "FacebookAI/xlm-roberta-base"
 model_type = "xlmroberta"
 
-train = Dataset.to_pandas(load_dataset('sinhala-nlp/sinhala-sentiment-analysis', split='train', download_mode='force_redownload'))
-test = Dataset.to_pandas(load_dataset('sinhala-nlp/sinhala-sentiment-analysis', split='test', download_mode='force_redownload'))
+train = Dataset.to_pandas(
+    load_dataset('sinhala-nlp/sinhala-sentiment-analysis', split='train', download_mode='force_redownload'))
+test = Dataset.to_pandas(
+    load_dataset('sinhala-nlp/sinhala-sentiment-analysis', split='test', download_mode='force_redownload'))
 
 index = test['id'].to_list()
 train = train.rename(columns={'comment_phrase': 'text_a', 'body': 'text_b', 'comment_sentiment': 'labels'}).dropna()
@@ -24,7 +26,6 @@ test_sentence_pairs = list(map(list, zip(test['text_a'].to_list(), test['text_b'
 
 macrof1_values = []
 weightedf1_values = []
-
 
 for i in range(5):
 
@@ -63,8 +64,9 @@ for i in range(5):
     if os.path.exists(model_args.output_dir) and os.path.isdir(model_args.output_dir):
         shutil.rmtree(model_args.output_dir)
 
-    model = TextClassificationModel(model_type, model_name, num_labels=3, args=model_args, use_cuda=torch.cuda.is_available())
-    temp_train, temp_eval = train_test_split(train, test_size=0.2, random_state=model_args.manual_seed*i)
+    model = TextClassificationModel(model_type, model_name, num_labels=3, args=model_args,
+                                    use_cuda=torch.cuda.is_available())
+    temp_train, temp_eval = train_test_split(train, test_size=0.2, random_state=model_args.manual_seed * i)
     model.train_model(temp_train, eval_df=temp_eval, macro_f1=macro_f1, weighted_f1=weighted_f1)
     predictions, raw_outputs = model.predict(test_sentence_pairs)
 
@@ -75,7 +77,6 @@ for i in range(5):
     macrof1_values.append(macro)
     weightedf1_values.append(weighted)
 
-
 print(macrof1_values)
 print(weightedf1_values)
 
@@ -84,7 +85,3 @@ print("STD Macro F1:", np.std(np.array(macrof1_values)))
 
 print("Mean Weighted F1:", np.mean(np.array(weightedf1_values)))
 print("STD Weighted F1:", np.std(np.array(weightedf1_values)))
-
-
-
-
