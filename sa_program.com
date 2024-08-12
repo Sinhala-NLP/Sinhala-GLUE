@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -p gpu-short
 #SBATCH --gres=gpu:1
-#SBATCH --mem=10G
+#SBATCH --mem=20G
 #SBATCH --time=04:00:00
 #SBATCH --cpus-per-task=1
 #SBATCH --mail-type=END,FAIL
