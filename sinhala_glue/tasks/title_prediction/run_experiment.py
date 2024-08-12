@@ -19,8 +19,8 @@ test = Dataset.to_pandas(
     load_dataset('sinhala-nlp/sinhala-headline-prediction', split='test', download_mode='force_redownload'))
 
 index = test['id'].to_list()
-train = train.rename(columns={'Headline': 'text_a', 'News Content': 'text_b', 'Is_headline': 'labels'}).dropna()
-test = test.rename(columns={'Headline': 'text_a', 'News Content': 'text_b'}).dropna()
+train = train.rename(columns={'headline': 'text_a', 'news_content': 'text_b', 'is_headline': 'labels'}).dropna()
+test = test.rename(columns={'headline': 'text_a', 'news_content': 'text_b'}).dropna()
 
 test_sentence_pairs = list(map(list, zip(test['text_a'].to_list(), test['text_b'].to_list())))
 
@@ -70,8 +70,8 @@ for i in range(5):
     predictions, raw_outputs = model.predict(test_sentence_pairs)
 
     test['predictions'] = predictions
-    macro = macro_f1(test["Is_headline"].tolist(), test["predictions"].tolist())
-    weighted = weighted_f1(test["Is_headline"].tolist(), test["predictions"].tolist())
+    macro = macro_f1(test["is_headline"].tolist(), test["predictions"].tolist())
+    weighted = weighted_f1(test["is_headline"].tolist(), test["predictions"].tolist())
 
     macrof1_values.append(macro)
     weightedf1_values.append(weighted)
