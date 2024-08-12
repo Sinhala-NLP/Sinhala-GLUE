@@ -22,6 +22,8 @@ index = test['id'].to_list()
 train = train.rename(columns={'comment_phrase': 'text_a', 'body': 'text_b', 'comment_sentiment': 'labels'}).dropna()
 test = test.rename(columns={'comment_phrase': 'text_a', 'body': 'text_b'}).dropna()
 
+train = train[["text_a", "text_b", "labels"]]
+
 test_sentence_pairs = list(map(list, zip(test['text_a'].to_list(), test['text_b'].to_list())))
 
 macrof1_values = []
