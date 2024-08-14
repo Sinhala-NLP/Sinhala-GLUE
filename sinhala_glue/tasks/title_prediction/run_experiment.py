@@ -10,7 +10,7 @@ from sinhala_glue.config.model_args import TextClassificationArgs
 from sinhala_glue.tasks.title_prediction.evaluation import macro_f1, weighted_f1
 from sinhala_glue.text_classification.text_classification_model import TextClassificationModel
 
-model_name = "FacebookAI/xlm-roberta-base"
+model_name = "FacebookAI/xlm-roberta-large"
 model_type = "xlmroberta"
 
 train = Dataset.to_pandas(
@@ -33,7 +33,7 @@ for i in range(5):
     model_args.num_train_epochs = 5
     model_args.no_save = False
     model_args.fp16 = True
-    model_args.learning_rate = 4e-5
+    model_args.learning_rate = 1e-6
     model_args.train_batch_size = 8
     model_args.max_seq_length = 512
     model_args.model_name = model_name
