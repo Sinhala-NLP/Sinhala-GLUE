@@ -10,8 +10,8 @@ from sinhala_glue.config.model_args import TextClassificationArgs
 from sinhala_glue.tasks.sentiment_analysis.evaluation import macro_f1, weighted_f1
 from sinhala_glue.text_classification.text_classification_model import TextClassificationModel
 
-model_name = "NLPC-UOM/SinBERT-small"
-model_type = "roberta"
+model_name = "google/rembert"
+model_type = "auto"
 
 train = Dataset.to_pandas(
     load_dataset('sinhala-nlp/sinhala-sentiment-analysis', split='train', download_mode='force_redownload'))
