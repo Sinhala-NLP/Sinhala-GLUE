@@ -68,7 +68,7 @@ for i in range(5):
     train_negative = train[train['labels'] == 'NEGATIVE']
     train_positive = train[train['labels'] == 'POSITIVE']
 
-    min_class_size = min(len(df_negative), len(df_positive))
+    min_class_size = min(len(train_negative), len(train_positive))
 
     train_negative_undersampled = resample(train_negative,
                                         replace=False,  # sample without replacement
