@@ -1,4 +1,15 @@
 datasets
 scikit-learn
 pandas
-tensorboard
+tensorboardx
+transformers
+wandb
+tokenizers
+wandb
+sentencepiece
+onnxruntime
+seqeval
+requests
+tqdm>=4.47.0
+regex
+scipy
