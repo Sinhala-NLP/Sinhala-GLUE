@@ -65,7 +65,28 @@ for i in range(5):
     if os.path.exists(model_args.output_dir) and os.path.isdir(model_args.output_dir):
         shutil.rmtree(model_args.output_dir)
 
-    model = TextClassificationModel(model_type, model_name, num_labels=2, args=model_args, weight=[1, 5],
+    train_negative = train[train['labels'] == 'NEGATIVE']
+    train_positive = train[train['labels'] == 'POSITIVE']
+
+    min_class_size = min(len(df_negative), len(df_positive))
+
+    train_negative_undersampled = resample(train_negative,
+                                        replace=False,  # sample without replacement
+                                        n_samples=min_class_size,  # to match minority class size
+                                        random_state=model_args.manual_seed * i)  # reproducible results
+
+    train_positive_undersampled = resample(train_positive,
+                                        replace=False,
+                                        n_samples=min_class_size,
+                                        random_state=model_args.manual_seed * i)
+
+    # Combine the undersampled majority class with the minority class
+    train_undersampled = pd.concat([train_negative_undersampled, train_positive_undersampled])
+
+    # Shuffle the resulting dataframe
+    train = train_undersampled.sample(frac=1, random_state=model_args.manual_seed * i).reset_index(drop=True)
+
+    model = TextClassificationModel(model_type, model_name, num_labels=2, args=model_args,
                                     use_cuda=torch.cuda.is_available())
     temp_train, temp_eval = train_test_split(train, test_size=0.2, random_state=model_args.manual_seed * i)
     model.train_model(temp_train, eval_df=temp_eval, macro_f1=macro_f1, weighted_f1=weighted_f1)
