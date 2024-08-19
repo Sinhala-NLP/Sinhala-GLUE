@@ -5,6 +5,7 @@ import numpy as np
 from datasets import Dataset
 from datasets import load_dataset
 from sklearn.model_selection import train_test_split
+from sklearn.utils import resample
 from sinhala_glue.tasks.comment_popularity_prediction.evaluation import macro_f1, weighted_f1
 
 from sinhala_glue.config.model_args import TextClassificationArgs
@@ -80,10 +81,8 @@ for i in range(5):
                                         n_samples=min_class_size,
                                         random_state=model_args.manual_seed * i)
 
-    # Combine the undersampled majority class with the minority class
     train_undersampled = pd.concat([train_negative_undersampled, train_positive_undersampled])
 
-    # Shuffle the resulting dataframe
     train = train_undersampled.sample(frac=1, random_state=model_args.manual_seed * i).reset_index(drop=True)
 
     model = TextClassificationModel(model_type, model_name, num_labels=2, args=model_args,
