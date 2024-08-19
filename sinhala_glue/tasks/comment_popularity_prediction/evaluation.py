@@ -1,14 +1,9 @@
-import numpy as np
-from scipy.stats import pearsonr, spearmanr
+from sklearn.metrics import f1_score, recall_score, precision_score
 
 
-def pearson_corr(preds, labels):
-    return pearsonr(preds, labels)[0]
+def macro_f1(y_true, y_pred):
+    return f1_score(y_true, y_pred, average='macro')
 
 
-def spearman_corr(preds, labels):
-    return spearmanr(preds, labels)[0]
-
-
-def rmse(preds, labels):
-    return np.sqrt(((np.asarray(preds, dtype=np.float32) - np.asarray(labels, dtype=np.float32)) ** 2).mean())
+def weighted_f1(y_true, y_pred):
+    return f1_score(y_true, y_pred, average='weighted')
