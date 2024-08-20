@@ -43,15 +43,15 @@ for i in range(5):
     model_args.model_type = model_type
     model_args.evaluate_during_training = True
     model_args.evaluate_during_training_verbose = True
-    model_args.evaluate_during_training_steps = 500
+    model_args.evaluate_during_training_steps = 1000
     model_args.use_multiprocessing = False
     model_args.use_multiprocessing_for_evaluation = False
     model_args.overwrite_output_dir = True
     model_args.save_recent_only = True
-    model_args.logging_steps = 500
+    model_args.logging_steps = 1000
     model_args.manual_seed = 777
     model_args.early_stopping_patience = 10
-    model_args.save_steps = 500
+    model_args.save_steps = 1000
     model_args.regression = False
     model_args.labels_list = ["POSITIVE", "NEGATIVE"]
 
@@ -67,7 +67,7 @@ for i in range(5):
     if os.path.exists(model_args.output_dir) and os.path.isdir(model_args.output_dir):
         shutil.rmtree(model_args.output_dir)
 
-    model = TextClassificationModel(model_type, model_name, num_labels=2, args=model_args,
+    model = TextClassificationModel(model_type, model_name, num_labels=2,  weight=[1, 4], args=model_args,
                                     use_cuda=torch.cuda.is_available())
     temp_train, temp_eval = train_test_split(train, test_size=0.2, random_state=model_args.manual_seed * i)
     model.train_model(temp_train, eval_df=temp_eval, macro_f1=macro_f1, weighted_f1=weighted_f1)
