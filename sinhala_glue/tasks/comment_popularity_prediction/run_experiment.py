@@ -13,7 +13,7 @@ from sinhala_glue.config.model_args import TextClassificationArgs
 
 from sinhala_glue.text_classification.text_classification_model import TextClassificationModel
 
-model_name = "FacebookAI/xlm-roberta-base"
+model_name = "FacebookAI/xlm-roberta-large"
 model_type = "xlmroberta"
 
 train = Dataset.to_pandas(load_dataset('sinhala-nlp/sinhala-comment-popularity-prediction', split='train'))
