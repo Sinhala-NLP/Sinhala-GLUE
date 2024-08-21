@@ -36,7 +36,7 @@ for i in range(5):
     model_args.num_train_epochs = 5
     model_args.no_save = False
     model_args.fp16 = True
-    model_args.learning_rate = 1e-5
+    model_args.learning_rate = 1e-6
     model_args.train_batch_size = 8
     model_args.max_seq_length = 512
     model_args.model_name = model_name
