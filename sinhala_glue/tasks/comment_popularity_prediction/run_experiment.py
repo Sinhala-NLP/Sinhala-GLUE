@@ -13,7 +13,7 @@ from sinhala_glue.config.model_args import TextClassificationArgs
 
 from sinhala_glue.text_classification.text_classification_model import TextClassificationModel
 
-model_name = "FacebookAI/xlm-roberta-large"
+model_name = "FacebookAI/xlm-roberta-base"
 model_type = "xlmroberta"
 
 train = Dataset.to_pandas(load_dataset('sinhala-nlp/sinhala-comment-popularity-prediction', split='train'))
@@ -36,7 +36,7 @@ for i in range(5):
     model_args.num_train_epochs = 5
     model_args.no_save = False
     model_args.fp16 = True
-    model_args.learning_rate = 1e-4
+    model_args.learning_rate = 4e-5
     model_args.train_batch_size = 8
     model_args.max_seq_length = 512
     model_args.model_name = model_name
@@ -67,7 +67,7 @@ for i in range(5):
     if os.path.exists(model_args.output_dir) and os.path.isdir(model_args.output_dir):
         shutil.rmtree(model_args.output_dir)
 
-    model = TextClassificationModel(model_type, model_name, num_labels=2,  weight=[1, 4], args=model_args,
+    model = TextClassificationModel(model_type, model_name, num_labels=2,  weight=[1, 5], args=model_args,
                                     use_cuda=torch.cuda.is_available())
     temp_train, temp_eval = train_test_split(train, test_size=0.2, random_state=model_args.manual_seed * i)
     model.train_model(temp_train, eval_df=temp_eval, macro_f1=macro_f1, weighted_f1=weighted_f1)
