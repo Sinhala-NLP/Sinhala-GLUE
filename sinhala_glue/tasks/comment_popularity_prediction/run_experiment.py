@@ -36,7 +36,7 @@ for i in range(5):
     model_args.num_train_epochs = 5
     model_args.no_save = False
     model_args.fp16 = True
-    model_args.learning_rate = 1e-5
+    model_args.learning_rate = 4e-5
     model_args.train_batch_size = 8
     model_args.max_seq_length = 512
     model_args.model_name = model_name
@@ -72,10 +72,11 @@ for i in range(5):
 
     train_positive_undersampled = resample(train_positive,
                                         replace=False,
-                                        n_samples=int(round(len(train_negative)*1.5)),
+                                        n_samples=int(round(len(train_negative))),
                                         random_state=model_args.manual_seed * i)
 
     train = pd.concat([train_negative, train_positive_undersampled])
+    train = train.sample(frac=1, random_state=model_args.manual_seed * i).reset_index(drop=True)
 
     model = TextClassificationModel(model_type, model_name, num_labels=2, args=model_args,
                                     use_cuda=torch.cuda.is_available())
