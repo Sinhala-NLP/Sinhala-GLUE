@@ -72,7 +72,7 @@ for i in range(5):
 
     train_positive_undersampled = resample(train_positive,
                                         replace=False,
-                                        n_samples=int(round(len(train_negative)*1.5)),
+                                        n_samples=int(round(len(train_negative))),
                                         random_state=model_args.manual_seed * i)
 
     train = pd.concat([train_negative, train_positive_undersampled])
