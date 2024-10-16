@@ -20,12 +20,12 @@ train = Dataset.to_pandas(load_dataset('sinhala-nlp/sinhala-comment-popularity-p
 test = Dataset.to_pandas(load_dataset('sinhala-nlp/sinhala-comment-popularity-prediction', split='test'))
 
 index = test['id'].to_list()
-train = train.rename(columns={'comment': 'text_a', 'news_content': 'text_b'}).dropna()
-test = test.rename(columns={'comment': 'text_a', 'news_content': 'text_b'}).dropna()
+train = train.rename(columns={'comment': 'text'}).dropna()
+test = test.rename(columns={'comment': 'text'}).dropna()
 
-train = train[["text_a", "text_b", "labels"]]
+train = train[["text", "labels"]]
 
-test_sentence_pairs = list(map(list, zip(test['text_a'].to_list(), test['text_b'].to_list())))
+test_sentences = test['text'].to_list()
 
 macrof1_values = []
 weightedf1_values = []
@@ -36,7 +36,7 @@ for i in range(5):
     model_args.num_train_epochs = 5
     model_args.no_save = False
     model_args.fp16 = True
-    model_args.learning_rate = 1e-6
+    model_args.learning_rate = 1e-5
     model_args.train_batch_size = 8
     model_args.max_seq_length = 512
     model_args.model_name = model_name
@@ -82,7 +82,7 @@ for i in range(5):
                                     use_cuda=torch.cuda.is_available())
     temp_train, temp_eval = train_test_split(train, test_size=0.2, random_state=model_args.manual_seed * i)
     model.train_model(temp_train, eval_df=temp_eval, macro_f1=macro_f1, weighted_f1=weighted_f1)
-    predictions, raw_outputs = model.predict(test_sentence_pairs)
+    predictions, raw_outputs = model.predict(test_sentences)
 
     test['predictions'] = predictions
     macro = macro_f1(test["labels"].tolist(), test["predictions"].tolist())
