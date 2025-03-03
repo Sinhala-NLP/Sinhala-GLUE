@@ -63,7 +63,7 @@ for i in range(5):
     if os.path.exists(model_args.output_dir) and os.path.isdir(model_args.output_dir):
         shutil.rmtree(model_args.output_dir)
 
-    model = TextClassificationModel(model_type, model_name, num_labels=1, args=model_args, use_cuda=torch.cuda.is_available())
+    model = TextClassificationModel(model_type, model_name, num_labels=1, args=model_args, use_cuda=torch.cuda.is_available(), from_flax=True)
     temp_train, temp_eval = train_test_split(train, test_size=0.2, random_state=model_args.manual_seed*i)
     model.train_model(temp_train, eval_df=temp_eval, pearson_corr=pearson_corr, spearman_corr=spearman_corr,
                               rmse=rmse)
