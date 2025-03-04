@@ -11,7 +11,7 @@ from sinhala_glue.tasks.semantic_textual_similarity.evaluation import pearson_co
 from sinhala_glue.text_classification.text_classification_model import TextClassificationModel
 
 model_name = "/mnt/data/ranasint/Projects/Sinhala-Transformers/sinhala-roberta-base/"
-model_type = "roberta"
+model_type = "auto"
 
 train = Dataset.to_pandas(load_dataset('sinhala-nlp/semantic-textual-similarity', split='train'))
 test = Dataset.to_pandas(load_dataset('sinhala-nlp/semantic-textual-similarity', split='test'))
